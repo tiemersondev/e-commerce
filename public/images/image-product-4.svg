@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 800" preserveAspectRatio="xMidYMid slice">
+  <defs>
+    <linearGradient id="bg4" x1="0" x2="1" y1="0" y2="1">
+      <stop offset="0%" stop-color="#f5e8ff" />
+      <stop offset="100%" stop-color="#d8b5ff" />
+    </linearGradient>
+  </defs>
+  <rect width="800" height="800" fill="url(#bg4)" />
+  <text x="50%" y="52%" text-anchor="middle" font-family="Inter, Arial, sans-serif" font-size="72" fill="#1f2937">Product Image 4</text>
+</svg>
