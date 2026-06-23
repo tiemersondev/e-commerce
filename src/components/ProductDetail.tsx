@@ -1,7 +1,7 @@
 "use client";
 
 import Image from "next/image";
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import { ShoppingCart, X, ChevronLeft, ChevronRight } from "lucide-react";
 import { useCart } from "@/context/cart-context";
@@ -24,6 +24,7 @@ export default function ProductDetail({ product }: ProductDetailProps) {
   const [quantity, setQuantity] = useState(1);
   const [isLightboxOpen, setIsLightboxOpen] = useState(false);
   const [confirmationVisible, setConfirmationVisible] = useState(false);
+  const confirmationTimeoutRef = useRef<number | null>(null);
   const { addItem, items, openCart } = useCart();
 
   const activeImage = product.images[activeImageIndex];
@@ -38,8 +39,13 @@ export default function ProductDetail({ product }: ProductDetailProps) {
     openCart();
     setConfirmationVisible(true);
 
-    window.setTimeout(() => {
+    if (confirmationTimeoutRef.current) {
+      window.clearTimeout(confirmationTimeoutRef.current);
+    }
+
+    confirmationTimeoutRef.current = window.setTimeout(() => {
       setConfirmationVisible(false);
+      confirmationTimeoutRef.current = null;
     }, 1800);
   };
 
@@ -71,6 +77,9 @@ export default function ProductDetail({ product }: ProductDetailProps) {
 
     return () => {
       window.removeEventListener("keydown", handleKeyDown);
+      if (confirmationTimeoutRef.current) {
+        window.clearTimeout(confirmationTimeoutRef.current);
+      }
     };
   }, [isLightboxOpen]);
 
@@ -89,6 +98,7 @@ export default function ProductDetail({ product }: ProductDetailProps) {
                 alt={`${product.name} image ${activeImageIndex + 1}`}
                 width={900}
                 height={900}
+                loading="eager"
                 className="h-full w-full object-cover transition duration-300 group-hover:scale-105"
               />
             </button>
@@ -148,7 +158,7 @@ export default function ProductDetail({ product }: ProductDetailProps) {
                   type="button"
                   onClick={decreaseQuantity}
                   className="h-10 w-10 rounded-xl bg-white text-2xl text-fm-orange transition hover:bg-fm-pale-orange"
-                  aria-label="Decrease quantity"
+                  aria-label="Diminuir quantidade"
                 >
                   –
                 </button>
@@ -157,7 +167,7 @@ export default function ProductDetail({ product }: ProductDetailProps) {
                   type="button"
                   onClick={increaseQuantity}
                   className="h-10 w-10 rounded-xl bg-white text-2xl text-fm-orange transition hover:bg-fm-pale-orange"
-                  aria-label="Increase quantity"
+                  aria-label="Aumentar quantidade"
                 >
                   +
                 </button>
@@ -204,7 +214,7 @@ export default function ProductDetail({ product }: ProductDetailProps) {
                 type="button"
                 onClick={() => setIsLightboxOpen(false)}
                 className="absolute right-4 top-4 z-20 inline-flex h-11 w-11 items-center justify-center rounded-full bg-white text-fm-very-dark-blue shadow-lg shadow-black/10 transition hover:bg-fm-light-grayish-blue"
-                aria-label="Close lightbox"
+                  aria-label="Fechar lightbox"
               >
                 <X className="h-5 w-5" />
               </button>
@@ -221,7 +231,7 @@ export default function ProductDetail({ product }: ProductDetailProps) {
                   type="button"
                   onClick={handlePreviousImage}
                   className="absolute left-5 top-1/2 -translate-y-1/2 inline-flex h-12 w-12 items-center justify-center rounded-full bg-white/90 text-fm-very-dark-blue shadow-lg shadow-black/10 transition hover:bg-white"
-                  aria-label="Previous image"
+                  aria-label="Imagem anterior"
                 >
                   <ChevronLeft className="h-5 w-5" />
                 </button>
@@ -229,7 +239,7 @@ export default function ProductDetail({ product }: ProductDetailProps) {
                   type="button"
                   onClick={handleNextImage}
                   className="absolute right-5 top-1/2 -translate-y-1/2 inline-flex h-12 w-12 items-center justify-center rounded-full bg-white/90 text-fm-very-dark-blue shadow-lg shadow-black/10 transition hover:bg-white"
-                  aria-label="Next image"
+                  aria-label="Próxima imagem"
                 >
                   <ChevronRight className="h-5 w-5" />
                 </button>

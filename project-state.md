@@ -20,11 +20,11 @@
 
 ## Em Andamento
 
-- Ajuste de fluxo de checkout mockado, caso o projeto exija conclusão completa do pagamento
+- Implementar fluxo de checkout mockado e página de sucesso como próxima etapa do projeto.
 
 ## Próximos Passos Exatos
 
-1. Implementar fluxo de checkout mockado e página de sucesso, caso desejado.
+1. Criar o fluxo de checkout mockado e a página de confirmação de pedido.
 2. Adicionar roteamento dinâmico de produto se for necessário para múltiplos itens.
 3. Ajustar detalhes de `Footer` e seções adicionais conforme o design final.
 4. Revisar a experiência em mobile e validar o layout com os assets fornecidos.

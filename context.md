@@ -34,12 +34,13 @@ Foi criado um mock de dados para os produtos, simulando uma fonte de dados para 
 
 A aplicação atualmente apresenta:
 - Layout global com `Header`, `Footer` e `CartProvider` em `src/components/layout/MainLayout.tsx`.
-- Barra de navegação responsiva com menu móvel opaco e painel lateral no mobile, alinhado ao design fornecido.
+- Barra de navegação responsiva com menu móvel e overlay de fundo cobrindo o conteúdo, alinhada ao design fornecido.
 - Dropdown de carrinho no cabeçalho com badge de notificação persistente, lista de produtos adicionados, subtotal e botão de checkout.
 - Página de produto detalhada em `src/components/ProductDetail.tsx`, incluindo galeria de imagens, miniaturas, seletor de quantidade, botão de adicionar ao carrinho e confirmação visual.
 - Componente de lightbox com navegação entre imagens, miniaturas e fechamento por clique no backdrop ou tecla `Esc`.
 - A home (`src/app/page.tsx`) exibe o produto principal com fidelidade ao visual do design fornecido.
 - A lógica de carrinho está centralizada no contexto (`src/context/cart-context.tsx`) e atualiza o badge e o dropdown corretamente.
+- Revisão de layout responsivo mobile concluída, incluindo correção do menu móvel e do overlay do fundo.
 
 ## Como Rodar/Testar
 
